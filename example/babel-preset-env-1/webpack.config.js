@@ -14,21 +14,38 @@ const config = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         options: {
+          cacheDirectory: true,
           presets: [
             [
               '@babel/preset-env',
               {
-                targets: {
-                  chrome: '58',
-                  ie: '11',
-                },
                 useBuiltIns: 'entry',
                 corejs: 3,
+                targets: {
+                  chrome: 58,
+                },
               },
             ],
             '@babel/preset-react',
           ],
         },
+      },
+      {
+        test: /\.(le|c)ss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.png|jpe?g$/,
+        use: ['url-loader'],
       },
     ],
   },
